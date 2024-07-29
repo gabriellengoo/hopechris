@@ -1,0 +1,26 @@
+{
+  "name": "hopefe",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxt/image": "^0.6.2",
+    "@nuxtjs/sanity": "^0.10.0",
+    "@sanity/client": "^6.4.11",
+    "core-js": "^3.25.3",
+    "nuxt": "^2.15.8",
+    "vue": "^2.7.10",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10",
+    "sanity-blocks-vue-component": "0.1.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^5.3.3",
+    "postcss": "^8.4.17"
+  }
+}
