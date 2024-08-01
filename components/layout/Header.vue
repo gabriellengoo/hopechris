@@ -1,79 +1,87 @@
 <template>
-  <div class="p-[2rem] fixed left-15 top-15 1000:top-30 1000:left-30 z-50 serif leading-none  pb-[5rem] text-sm flex w-screen justify-between">
-    <!-- text-[1.4rem] -->
-    <p class="uppercase">We are the new hope</p>
-    <div class="uppercase">
-      <NuxtLink to="/" class="p-10 header-link">Store</NuxtLink>
-      <NuxtLink to="/">Contact</NuxtLink>
+  <div class="header-container fixed left-4 top-4 z-50 serif leading-none pb-20 text-sm w-[90%] md:w-[98%] flex flex-col md:items-start items-center 1000:flex-row 1000:justify-between 1000:items-center">
+    <p class="header-title ">We are the new hope</p>
+    <div class="header-links flex flex-col  uppercase 1000:mt-0 1000:flex-row  1000:space-x-4">
+      <NuxtLink to="/" class="p-2">Store</NuxtLink>
+      <NuxtLink to="/" class="p-2">Contact</NuxtLink>
     </div>
   </div>
 </template>
-
 <script>
 import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
-    return {
-     
-    };
+    return {};
   },
   methods: {
     ...mapMutations(["TOGGLE_MENU"]),
-
- 
   },
   computed: {
     ...mapState(["menu"]),
-
     arrowIconClass() {
       return this.isCollapsibleOpen ? "fas fa-arrow-up" : "fas fa-arrow-down";
     },
   },
 };
 </script>
-
-
 <style scoped>
-a{
-  /* cursor: url('/CURSOR.svg'), auto !important; */
+a {
   text-decoration: none;
   color: black;
-  opacity: .3;
-  /* animation: bounce 1s infinite alternate; */
-  transition-duration: .5s;
+  opacity: 0.3;
+  transition-duration: 0.5s;
 }
 
-a:hover{
+a:hover {
   opacity: 1;
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
-.abouttexttitle {
+.header-container {
+  padding: 1rem;
+}
+
+.header-title {
+  /* font-size: 2rem; */
   text-transform: uppercase;
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
 }
 
-.containerhome {
+.header-links {
   display: flex;
-  width: 200vw; /* Double the width for both sections */
-  height: 100vh;
-  transition: transform 0.5s ease-in-out;
-  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-.new-section {
-  width: 50vw;
-  height: 100vh;
-  transition: transform 0s ease-in-out;
-  overflow: hidden;
+.header-link {
+  padding: 0.5rem;
 }
 
-.presssectextlink {
-  /* padding-top: 1rem; */
+@media (min-width: 1000px) {
+  .header-container {
+    /* padding: 2rem; */
+    /* left: 2rem; */
+    top: 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-title {
+  /* font-size: 2rem; */
   text-transform: uppercase;
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
+}
+
+  .header-links {
+    flex-direction: row;
+    margin-top: 0;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+
+  .header-link {
+    padding: 1rem;
+  }
 }
 </style>

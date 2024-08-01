@@ -10,7 +10,7 @@
                   :aspect="section.image.aspect"
                   :src="section.image.image"
                   v-if="section.image.image"
-                  class="h-[5vw] object-cover"
+                  class="md:h-[5vw] h-[20vw] object-cover"
                 ></MediaImage>
               </div>
             </div>
