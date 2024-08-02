@@ -2,7 +2,7 @@
   <div class="header-container fixed left-4 top-4 z-50 serif leading-none pb-20 text-sm w-[90%] md:w-[98%] flex flex-col md:items-start items-center 1000:flex-row 1000:justify-between 1000:items-center">
     <p class="header-title ">We are the new hope</p>
     <div class="header-links flex flex-col  uppercase 1000:mt-0 1000:flex-row  1000:space-x-4">
-      <NuxtLink to="/" class="p-2">Store</NuxtLink>
+      <NuxtLink to="https://www.facebook.com/ChisaraMusic/" class="p-2">Store</NuxtLink>
       <NuxtLink to="/" class="p-2">Contact</NuxtLink>
     </div>
   </div>
