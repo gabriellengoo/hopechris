@@ -3,10 +3,10 @@
     <p class="header-title ">We are the new hope</p>
     <div class="header-links flex flex-col  uppercase 1000:mt-0 1000:flex-row  1000:space-x-4">
       <!-- <NuxtLink to="https://www.facebook.com/ChisaraMusic/" class="p-2">Store</NuxtLink> -->
-      <a href="https://www.facebook.com/ChisaraMusic/" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
+      <a href="https://www.facebook.com/ChisaraMusic/" target="_blank" rel="noopener noreferrer" class="p-2" style="pointer-events: auto;">
               Store
             </a>
-      <NuxtLink to="/" class="p-2">Contact</NuxtLink>
+      <NuxtLink to="/" class="">Contact</NuxtLink>
     </div>
   </div>
 </template>
