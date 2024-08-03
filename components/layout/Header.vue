@@ -6,7 +6,14 @@
       <a href="https://7bbc00-0b.myshopify.com/" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
               Store
             </a>
-      <NuxtLink to="/" class="">Contact</NuxtLink>
+            <a href="https://www.instagram.com/chisara_/" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
+              Instagram
+            </a>
+            <a href="mailto:CONTACT@CHISARAAGOR.COM" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
+  Contact
+</a>
+
+      <!-- <NuxtLink to="/" class="">Contact</NuxtLink> -->
     </div>
   </div>
 </template>
