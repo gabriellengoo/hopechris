@@ -10,6 +10,7 @@ export const state = () => ({
   aboutPage: null,
   poems: null,
   metaemailsData: null,
+  head: null,
 })
 
 
@@ -50,6 +51,10 @@ export const mutations = {
   CLOSE_MENU(state) {
     state.menu = false
   },
+
+  SET_HEADLINKS(state, data) {
+    state.head = data
+  },
 }
 
 import { groq } from '@nuxtjs/sanity'
@@ -63,6 +68,15 @@ export const actions = {
     const grid = await this.$sanity.fetch(gridQuery)
     commit('SET_GRID', grid)
 
+
+       // Head links
+       const headQuery = groq`*[_type == "home" ]  {..., listImage, linkin, linkst, linkco }
+      | order(_updatedAt desc)[0]
+        `
+       const head = await this.$sanity.fetch(headQuery)
+       commit('SET_HEADLINKS', head)
+
+       
 
       // Works Grid
       const gridQuery2 = groq`*[_type == "works" ] {grid[] {_key, double, spacer, youtubeUrl,vimeoUrl, "video" : {"id" : video.asset->playbackId, "aspect" : video.asset->data.aspect_ratio}, "image" : {"image" : image.asset._ref, "aspect" : image.asset->metadata.dimensions.aspectRatio, "size" : {"width" : image.asset->metadata.dimensions.width, "height" : image.asset->metadata.dimensions.height}, "position" : position}, link, title, "reference" : {"key" : reference._ref, "title" : reference->title, "clients" : reference->client[].label, "slug" : reference->slug.current, "talent" : reference->talent->title, "talentId" : reference->talent._ref, "team" : reference->team, "meta" : reference->meta}}

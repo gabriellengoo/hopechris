@@ -108,7 +108,7 @@ export default {
   },
 
   async asyncData({ $sanity, store }) {
-    const homeQuery = groq`*[_type == "home" ]  {..., listImage,} {..., 
+    const homeQuery = groq`*[_type == "home" ] {..., listImage, linkin, linkst, linkco } {..., 
      
      grid[] {_key, spacer,youtubeUrl,vimeoUrl, "video" : 
     {"id" : video.asset->playbackId, "aspect" : video.asset->data.aspect_ratio},

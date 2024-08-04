@@ -1,9 +1,20 @@
 <template>
-  <div class="header-container fixed left-4 top-4 z-50 serif leading-none pb-20 text-sm w-[90%] md:w-[98%] flex flex-col md:items-start items-center 1000:flex-row 1000:justify-between 1000:items-center">
+  <div  class="header-container fixed left-4 top-4 z-50 serif leading-none pb-20 text-sm w-[90%] md:w-[98%] flex flex-col md:items-start items-center 1000:flex-row 1000:justify-between 1000:items-center">
     <p class="header-title ">We are the new hope</p>
-    <div class="header-links flex flex-col  uppercase 1000:mt-0 1000:flex-row  1000:space-x-4">
+    <div  class="header-links flex flex-col  uppercase 1000:mt-0 1000:flex-row  1000:space-x-4">
       <!-- <NuxtLink to="https://www.facebook.com/ChisaraMusic/" class="p-2">Store</NuxtLink> -->
-      <a href="https://7bbc00-0b.myshopify.com/" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
+      <a v-if="head" :href="head.linkst" target="_blank">
+        Store
+            </a>
+            <a v-if="head" :href="head.linkin" target="_blank">
+              Instagram
+            </a>
+            <a v-if="head" :href="head.linkco" target="_blank">
+              Contact
+            </a>
+
+
+             <!-- <a href="https://7bbc00-0b.myshopify.com/" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
               Store
             </a>
             <a href="https://www.instagram.com/chisara_/" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
@@ -11,7 +22,7 @@
             </a>
             <a href="mailto:CONTACT@CHISARAAGOR.COM" target="_blank" rel="noopener noreferrer" class="" style="pointer-events: auto;">
   Contact
-</a>
+</a> -->
 
       <!-- <NuxtLink to="/" class="">Contact</NuxtLink> -->
     </div>
@@ -19,19 +30,26 @@
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
+import { groq } from "@nuxtjs/sanity";
 
 export default {
   data() {
     return {};
   },
   methods: {
-    ...mapMutations(["TOGGLE_MENU"]),
+    // ...mapMutations(["TOGGLE_MENU"]),
+    ...mapMutations(["SET_HEADLINKS"]),
   },
   computed: {
-    ...mapState(["menu"]),
+    ...mapState(["menu", 'head']),
     arrowIconClass() {
       return this.isCollapsibleOpen ? "fas fa-arrow-up" : "fas fa-arrow-down";
     },
+  },
+  async asyncData({ params, $sanity }) {
+    const query = groq`*[_type == "home"] {..., listImage, linkin, linkst, linkco }`;
+    const homes = await $sanity.fetch(query);
+    return { homes };
   },
 };
 </script>
