@@ -19,11 +19,13 @@ body,
 html {
   height: auto;
   min-height: 100vh !important;
+  font-family: Roboto, sans-serif;
   /* background: #f7f7f7; */
   /* background-color: rgb(255, 212, 1); */
   /* background-color: black; */
   /* overflow: hidden; */
   overflow-x: hidden;
+  /* font-size: 1vw; */
   /* cursor: crosshair; */
    cursor: default;
   /* cursor: url('/CURSOR.svg'), auto !important; */
@@ -124,6 +126,32 @@ svg{
   outline: none;
 }
 
+.homeimgsize{
+  display: flex;
+      justify-content: center;
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      top: 0;
+      left: 0;
+      align-items: center;
+      pointer-events: none;
+}
+
+.weltext{
+  width: 100vw;
+  
+}
+
+.weltextc{
+  width: 20vw;
+  padding-bottom: 1vw;
+
+  width: 17vw;
+  padding-bottom: 17vw;
+  padding-bottom: 13vw;
+  font-size: .8vw;
+}
 
 @media (max-width: 768px) {
   .mbcopyr{
@@ -134,20 +162,16 @@ svg{
   width: 40vw !important;
 }
 
+#__nuxt,
+#__layout,
+body,
+html {
+  font-size: 4vw;
+}
 
 }
 
- {
-  /* .md\:overflow-hidden {
-    overflow: hidden;
-    overflow: scroll !important;
-} */
-    /* overflow: scroll !important;
-    min-height: 100vh !important; */
-    /* pr-6 {
-    padding-right: 0rem;
-} */
-}
+
 
 
 

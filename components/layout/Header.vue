@@ -57,7 +57,7 @@ export default {
 a {
   text-decoration: none;
   color: black;
-  opacity: 0.3;
+  /* opacity: 0.3; */
   transition-duration: 0.5s;
 }
 

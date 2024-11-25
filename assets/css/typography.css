@@ -25,30 +25,51 @@
   font-display: swap;
 }
 
+
 @font-face {
-  font-family: 'font';
+  font-family: 'greed';
   src: 
-    url('~assets/fonts/font.woff2') format('woff2');
-    /* url('~assets/fonts/font.woff') format('woff'); */
+    url('~assets/fonts/Greed-Medium.woff2') format('woff2'),
+    url('~assets/fonts/Greed-Medium.woff') format('woff');
+    font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AtlasGrotesk';
+  src: 
+    url('~assets/fonts/AtlasGrotesk-Regular.woff2') format('woff2'),
+    url('~assets/fonts/AtlasGrotesk-Regular.woff') format('woff');
   font-weight: 200;
   font-display: swap;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
   
-  /* html {
+  html {
     font-size: 65%;
-  } */
+  }
   
   body {
-    /* font-family: 'Owners', sans-serif;
-    font-family: arial; */
-    font-family: 'font';
+    /* font-family: 'greed', sans-serif; */
+    font-family: Atlas Grotesk, sans-serif;
+    /* color: hsl(249.94deg 74.43% 42.94%); */
+    /* font-family: arial; */
     /* letter-spacing: -.2px; */
-    font-weight: 300;
+    /* font-family: "Roboto", sans-serif; */
+    /* font-weight: 400; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
     /* font-size: 10.3px; */
   } 
+
+  .titletextfont{
+    font-family: 'greed', sans-serif;
+    font-size: 3.5rem !important;
+       /* font-family: "Roboto", sans-serif; */
+    font-weight: 400;
+  }
 
   @media only screen and (min-width: 2560px) {
 

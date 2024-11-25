@@ -8,90 +8,63 @@
       :class="size"
       horizontal-order="true"
     >
+    <div>
+      <div class=" bord">
+          <p class="w-[6vw]">
+            Date
+          </p>
+          <figcaption class="text-sm">
+            Title
+          </figcaption>
+        </div>
+    </div>
       <div
         v-masonry-tile
-        class="relative transition-opacity duration-300 item"
+        class="relative transition-opacity duration-300 item liststyle"
         v-for="item in items"
         :key="item._key"
         :class="[
           item.double ? 'double h-fit' : '',
           item.spacer != 0 ? '' : '',
-
         ]"
+        @mouseenter="hover(item)"
+        @mouseleave="leave"
       >
-      
+        <div class="list-content">
+          <p v-if="item.dis" class="w-[6vw]">
+            {{ item.dis }}
+          </p>
+          <figcaption v-if="item.title" class="text-sm">
+            {{ item.title }}
+          </figcaption>
+        </div>
+<!--      v-if="hoveredItem === item" -->
         <figure
-          class="flex flex-col w-[19vw]"
-          :style="{ minHeight: item.video.id ? (isDesktop ? 'auto' : 'auto') : 'auto' }"
-          :class="[
-            item.spacer
-              ? `h-space-${item.spacer + 1} md:h-space-${item.spacer}`
-              : item.image.aspect >= 1
-              ? item.double
-                ? 'h-space-10 md:h-space-10 2xl:h-space-10'
-                : 'h-space-5 md:h-space-3 2xl:h-space-2'
-              : item.double
-              ? 'h-space-fit md:h-space-fit 2xl:h-space-fit'
-              : 'h-space-12 md:h-space-6 2xl:h-space-4',
-          ]"
+     
+          class="absolute top-0 left-0 w-full h-full flex flex-col imgspan"
         >
-          <figure
-            :class="[
-              containerClass,
-              item.image.position == 'right'
-                ? 'items-end'
-                : item.image.position == 'center'
-                ? 'items-center'
-                : 'items-start',
-            ]"
-          >
-            <span class="flex flex-col items-start w-auto h-full max-w-full">
-              <section class="relative z-10 grid md:grid-cols-12 grid-cols-2 gap-y-18 1000:gap-y-12 1000:px-30 1000:pb-50 pt-150 1000:pt-125 w-full max-w-2000 mx-auto">
-                <section class="col-span-11 1000:col-span-12 select-none">
-                  <div class="grid  md:grid-cols-12 grid-cols-2 gap-x-10 1000:gap-y-10 1000:gap-x-36">
-                    <p v-if="item.dis" class="col-span-2 1000:col-span-1 sans whitespace-nowrap opacity-30 text-sm">
-                      {{ item.dis }}
-                    </p>
-                    <div class="1000:leading-20 pb-2 col-span-10 1000:max-w-[500px] serif richT">
-                      <a v-if="item.youtubeUrl" :href="item.youtubeUrl" target="_blank">
-                        <figcaption class="text-sm" v-if="size == 'small'">
-                          <span v-if="item.title">{{ item.title }}</span>
-                          <span v-else>{{ item.reference.title }}</span>
-                        </figcaption>
-                      </a>
-                      <MediaImage
-                        :size="item.image.size"
-                        :aspect="item.image.aspect"
-                        :src="item.image.image"
-                        v-if="item.image.image"
-                        :class="imageClass"
-                        :sizes="size == 'sm' ? 'sm:60vw md:15vw' : 'sm:150vw md:150vw'"
-                      ></MediaImage>
-                      <a v-if="item.vimeoUrl" :href="item.vimeoUrl" target="_blank">
-                        <figcaption class="text-sm" v-if="size == 'small'">
-                          <span v-if="item.title">{{ item.title }}</span>
-                          <span v-else>{{ item.reference.title }}</span>
-                        </figcaption>
-                      </a>
-                      <!-- Display YouTube Video -->
-                      <iframe
-                        v-if="item.vimeoUrl"
-                        :src="getYouTubeEmbedUrl(item.vimeoUrl)"
-                        frameborder="0"
-                        allowfullscreen
-                        class="w-[80vw] md:w-auto"
-                      ></iframe>
-                    </div>
-                  </div>
-                </section>
-              </section>
-            </span>
-          </figure>
+          <MediaImage
+            v-if="item.image.image"
+            :size="item.image.size"
+            :aspect="item.image.aspect"
+            :src="item.image.image"
+            :class="imageClass"
+            :sizes="size == 'sm' ? 'sm:60vw md:15vw' : 'sm:150vw md:150vw'"
+            class="imgspanimg"
+          ></MediaImage>
+          <iframe
+            v-if="item.vimeoUrl"
+            :src="getYouTubeEmbedUrl(item.vimeoUrl)"
+            frameborder="0"
+            allowfullscreen
+            class="w-full h-full imgspanvid"
+          ></iframe>
         </figure>
       </div>
     </div>
   </client-only>
 </template>
+
 
 <script>
 import { mapMutations, mapState } from 'vuex';
@@ -99,63 +72,118 @@ export default {
   props: ['items', 'size'],
   data() {
     return {
-      project: false,
+      hoveredItem: null, // State to track the hovered item
+      isDesktop: false,
       containerClass: 'flex flex-col w-full h-full',
       imageClass: 'contain-image',
-      isDesktop: false,
     };
   },
-  computed: {
-    ...mapState(['activeProject', 'activeTalent']),
-  },
-  mounted() {
-    this.redraw();
-    this.isDesktop = window.innerWidth > 768;
-    window.addEventListener('resize', this.handleResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
-  },
   methods: {
-    ...mapMutations(['SET_ACTIVE_PROJECT', 'SET_ACTIVE_TALENT']),
-    redraw() {
-      if (typeof this.$redrawVueMasonry === 'function') {
-        this.$redrawVueMasonry();
-      }
-    },
     getYouTubeEmbedUrl(vimeoUrl) {
       const videoId = vimeoUrl.split("v=")[1];
       return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&showinfo=0`;
     },
-    handleResize() {
-      this.isDesktop = window.innerWidth > 768;
-    },
     hover(item) {
-      if (item.reference.title) {
-        this.SET_ACTIVE_PROJECT(item.reference);
-        if (this.size === 'small') {
-          this.SET_ACTIVE_TALENT(item.reference);
-        } else {
-          this.SET_ACTIVE_TALENT(item.reference.talentId);
-        }
-      } else {
-        this.SET_ACTIVE_PROJECT(false);
-      }
+      this.hoveredItem = item; // Set the currently hovered item
     },
     leave() {
-      this.SET_ACTIVE_PROJECT(false);
-      this.SET_ACTIVE_TALENT(false);
+      this.hoveredItem = null; // Clear the hovered item on mouse leave
     },
   },
 };
+
 </script>
 
 <style scoped>
-a:hover {
-  text-decoration: underline;
+.bord{
+  border-bottom: .02vw solid #1C1C1C;
+  padding-bottom: .5vw;
+    padding-top: .5vw;
+    display: flex;
+    position: relative;
 }
 
-.vdpadoverview {
-  padding: 5px;
+.liststyle {
+  width: 100%;
+  border-bottom: .02vw solid #1C1C1C;
+  /* padding-top: 2vw; */
+  color: #1C1C1C;
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+  /* transition: .5s ease-in-out; */
+}
+
+.liststyle:hover {
+color: rgb(234, 234, 234);
+ background-color: #1C1C1C;
+ z-index: 100 !important;
+ z-index: 100 !important;
+    position:fixed;
+    width: 100vw;
+    left: 0;
+ /* transition: .5s ease-in-out; */
+}
+
+.list-content {
+  padding-bottom: .5vw;
+    padding-top: .5vw;
+    display: flex;
+    position: relative;
+}
+
+.list-content:hover {
+  background-color: #1C1C1C;
+  padding-bottom: .5vw;
+    padding-top: .5vw;
+    display: flex;
+    z-index: 100 !important;
+    position: relative;
+}
+
+figure {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.liststyle:hover figure {
+  opacity: 1;
+  z-index: 90;
+}
+
+.imgspan{
+  position: fixed;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh !important;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+}
+
+.imgspanimg img{
+  width: 40vw;
+  width: 40vw;
+    height: 10vw;
+
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  */
+}
+
+.masonry .item img {
+    width: 40vw !important;
+    z-index: 90 !important;
+}
+
+figure iframe{
+  z-index: 90;
+  width: 100vw;
+    height: 100vh;
 }
 </style>
+

@@ -6,18 +6,13 @@
    
 
     <transition name="fade">
-    <LayoutHeader
+    <!-- <LayoutHeader
       :class="
         $nuxt.$route.name == 'index'
-        // $nuxt.$route.name == 'home' ||
-        // $nuxt.$route.name == 'index-bak' ||
-        // $nuxt.$route.name == 'about' ||
-        // $nuxt.$route.name == 'work' || 
-        // $nuxt.$route.name == 'contact'
           ? ''
           : ' md:flex'
       "
-    ></LayoutHeader>
+    ></LayoutHeader> -->
   </transition>
 
   <transition name="fade">

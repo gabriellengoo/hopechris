@@ -50,6 +50,9 @@ export default {
   text-indent: 1rem;
 } */
 
+.weltextc div p:first-child{
+ padding-bottom: 1vw;
+}
 
 p{
   /* font-family: 'GTWalsheimcr'; */

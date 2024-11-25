@@ -1,16 +1,16 @@
 <template>
-  <!-- <Tutorial/> pt-[12.5rem]-->
-  <div class="pb-[5rem] pt-[5rem] pl-[2rem] pr-[2rem]">
+  <!-- <Tutorial/> pt-[12.5rem] pt-[5rem]-->
+  <div class="pb-[5rem] pt-[2rem]  pl-[2rem] pr-[2rem]">
 
     <!-- logo -->
-    <div v-if="home && home.sections" class="homeimgsize z-20">
-              <div v-for="section in home.sections" :key="section._key" class='h-2/6 py-5'>
+    <div v-if="home && home.sections" class="homeimgsize z-0">
+              <div v-for="section in home.sections" :key="section._key" class=''>
                 <MediaImage
                   :size="section.image.size"
                   :aspect="section.image.aspect"
                   :src="section.image.image"
                   v-if="section.image.image"
-                  class="md:h-[5vw] h-[20vw] object-cover"
+                  class="md:h-[17vw] h-auto object-cover"
                 ></MediaImage>
               </div>
             </div>
@@ -18,10 +18,10 @@
     <div
       v-for="section in home.sections"
       :key="section._key"
-      class="py-5"
+      class="py-5 weltext"
     >
       <Richtext
-        class=""
+        class="weltextc"
         :blocks="section.content"
         v-if="section.content"
       ></Richtext>
